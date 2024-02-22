@@ -25,4 +25,6 @@ let app = new Vue({
             newTaskItem: [],
         }
     },
-    methods: {}});
+    methods: {
+
+    }});

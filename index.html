@@ -10,6 +10,30 @@
     <title>Document</title>
 </head>
 <body>
-
+<div id="app">
+    <div class="addForm">
+        <form @submit.prevent="addEntry">
+            <h2>Create New Entry</h2>
+            <label for="title">Title:</label>
+            <input id="title" type="text" v-model="newEntry.title">
+            <label for="description">Description:</label>
+            <textarea id="description" v-model="newEntry.description"></textarea>
+            <label for="deadline">Deadline:</label>
+            <input id="deadline" type="date" v-model="newEntry.deadline">
+            <button type="submit">Add Entry</button>
+        </form>
+    </div>
+    <div class="stage" v-for="(stage, stageIndex) in stages" :key="stageIndex">
+        <h2>{{ stage.name }}</h2>
+        <div v-for="(entry, entryIndex) in stage.entries" :key="entryIndex">
+            <div v-if="editedEntryIndex !== entryIndex || editedStageIndex !== stageIndex">
+                <h3>{{ entry.title }}</h3>
+                <p>{{ entry.description }}</p>
+                <p>Created At: {{ entry.createdAt }}</p>
+                <p>Deadline: {{ entry.deadline }}</p>
+                <p>Last Modified: {{ entry.lastModified }}</p>
+                <p v-if="entry.tasks.length > 0">Task List:</p>
+            </div>
+        </div>
 </body>
 </html>
