@@ -32,7 +32,20 @@
                 <p>Created At: {{ entry.createdAt }}</p>
                 <p>Deadline: {{ entry.deadline }}</p>
                 <p>Last Modified: {{ entry.lastModified }}</p>
-                <p v-if="entry.tasks.length > 0">Task List:</p>
+                <p class="reasonReturn" v-if="returnHistory[entry.id]">
+                    Return History:
+                <ul>
+                    <li class="reasonReturn" v-for="reason in returnHistory[entry.id]">{{ reason }}</li>
+                </ul>
+                </p>
+                <button class="edit-button" @click="editEntry(entryIndex, stageIndex)">Edit</button>
+                <button class="delete-button" @click="removeEntry(entryIndex, stageIndex)">Delete</button>
+                <button class="move-button" @click="moveEntry(entryIndex, stageIndex, stageIndex + 1)">Move</button>
+                <button class="move-button" v-if="stageIndex === 2" @click="moveEntry(entryIndex, stageIndex, stageIndex - 1)">Return</button>
+                <label v-if="stageIndex === 2" for="reason">Return Reason:</label>
+                <input class="return-reason-input" v-if="stageIndex === 2" id="reason" type="text" v-model="entry.reason">
+            </div>
+        </div>
             </div>
         </div>
 </body>
