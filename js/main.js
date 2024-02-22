@@ -53,4 +53,15 @@ let app = new Vue({
                 tasks: []
             };
         },
+        editForm(entryIndex) {
+            this.stages[this.editedStageIndex].entries[entryIndex] = { ...this.editedEntry, lastModified: new Date().toLocaleString() };
+            this.editedEntry = null;
+            this.editedEntryIndex = null;
+            this.editedStageIndex = null;
+        },
+        editEntry(entryIndex, stageIndex) {
+            this.editedEntry = { ...this.stages[stageIndex].entries[entryIndex] };
+            this.editedEntryIndex = entryIndex;
+            this.editedStageIndex = stageIndex;
+        },
     }})
