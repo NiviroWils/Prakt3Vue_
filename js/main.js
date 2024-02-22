@@ -64,4 +64,11 @@ let app = new Vue({
             this.editedEntryIndex = entryIndex;
             this.editedStageIndex = stageIndex;
         },
+        removeEntry(entryIndex, stageIndex) {
+            this.stages[stageIndex].entries.splice(entryIndex, 1);
+        },
+        moveEntry(entryIndex, fromStageIndex, toStageIndex) {
+            const entryToMove = this.stages[fromStageIndex].entries.splice(entryIndex, 1)[0];
+            this.stages[toStageIndex].entries.push(entryToMove);
+        },
     }})
